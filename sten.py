@@ -46,7 +46,7 @@ def frombits(bits):
 
 def main():
 
-    option = 0
+    option = 0 #1-embed 2-extract
     fName = ""
     msg = ""
     outName = ""
@@ -64,18 +64,18 @@ def main():
         if o == "-m":
             print("embedding...")
             fName = str(a)
-            print(fName)
+            #print(fName)
             option = 1
             msg = input("Message to embed: ")
             outName = input("Name of new image: ")
         elif o in ("-x"):
             print("extracing...")
             fName = str(a)
-            print(fName)
+            #print(fName)
             option = 2
         else:
             assert False, "unhandled option"
-    print("end of getopt")
+    #print("end of getopt")
 
     if option == 1:
         #variables
@@ -110,12 +110,12 @@ def main():
 
         #get width & height to iterate over
         width, height = img.size
-        print("w: " + repr(width) + "  h: " + repr(height))
+        #print("w: " + repr(width) + "  h: " + repr(height))
 
         #get input msg
         inputMsg = msg
         msgLength = len(inputMsg) * 8
-        print("msgLength: " + repr(msgLength))
+        #print("msgLength: " + repr(msgLength))
 
         #embed msgLength in bottom right 11 pixels
         bitIndex = 31
@@ -204,6 +204,7 @@ def main():
             print("\tr: " + bin(red) + "  g: " + bin(green) + "  b: " + bin(blue))
             
         img.save(outName)
+        print("...done")
     elif option == 2:
         #variables
         #once initialized, these variables won't change
@@ -234,7 +235,7 @@ def main():
 
         #get width & height to iterate over
         width, height = img.size
-        print("w: " + repr(width) + "  h: " + repr(height))
+        #print("w: " + repr(width) + "  h: " + repr(height))
 
         #get length of string from bottom-right 11 pixels in image
         binaryString = ""
@@ -250,7 +251,7 @@ def main():
             if i != width-11: #skip blue on 11th pixel
                 binaryString = binaryString + str(blue)
         msgLength = int(binaryString, 2)
-        print(msgLength)
+        #print(msgLength)
 
         #get chars from binary in image
         binaryString = ""
@@ -283,7 +284,7 @@ def main():
         outputMsg = decode_binary_string(binaryString)
         print(outputMsg)
     
-    print("done...")
+    print("...done")
 
 if __name__ == "__main__":
     main()
