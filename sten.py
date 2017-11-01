@@ -116,6 +116,9 @@ def main():
         inputMsg = msg
         msgLength = len(inputMsg) * 8
         #print("msgLength: " + repr(msgLength))
+        if msgLength > width*height*3:
+            print("message too long")
+            sys.exit()
 
         #embed msgLength in bottom right 11 pixels
         bitIndex = 31
